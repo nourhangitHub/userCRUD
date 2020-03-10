@@ -1,0 +1,56 @@
+<form  (ngSubmit)="onsubmit()"  [formGroup]="myForm" novalidate>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>frist name {{home.fristName}}</label>
+                <input type="text" class="form-control" name="fristName" [(ngModel)]="home.fristName"
+                 formControlName="fristName"  [ngClass]="{'is-invalid': myForm.get('fristName').touched && myForm.get('fristName').invalid}" >
+                <div class="invalid-feedback">
+                    <div>First name is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>last name {{home.lastName}}</label>
+                <input type="text" class="form-control" name="lastName" [(ngModel)]="home.lastName" 
+                formControlName="lastName" [ngClass]="{'is-invalid': myForm.get('lastName').touched && myForm.get('lastName').invalid}" >
+                <div class="invalid-feedback">
+                    <div>Last Name is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>e-mail </label>
+                <input type="email" class="form-control" name="email" [(ngModel)]="home.email" 
+                formControlName="email" [ngClass]="{'is-invalid': myForm.get('email').touched && myForm.get('email').invalid}" >
+                <div *ngIf="myForm.get('email').touched && myForm.get('email').invalid" class="invalid-feedback">
+                    <div *ngIf="myForm.get('email').errors.required">Email is required</div>
+                    <div *ngIf="myForm.get('email').errors.email"> Email must invalid</div>
+            </div>
+            <br>
+            <button  class="btn btn-primary" > {{title}} </button>
+           </div>
+    </div>
+    </div>
+</form>
+<br>
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Email</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor=" let user of homeArray ; let i=index">
+            <td>{{i}}</td>  
+            <td>{{user.fristName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.email}}</td>
+            <td><button class="btn btn-sm btn-danger" (click)="delete(i)">Delete</button> </td>
+            <td><button class="btn btn-sm btn-secondary" (click)="edit(user,i)">Edit</button> </td>
+          </tr>      
+        </tbody>
+</table>
